@@ -1,0 +1,24 @@
+#ifndef BOID_H
+#define BOID_H
+
+#include <ostream>
+
+class boid{
+private:
+    int boid_x;  //X component of the boid position (pixel)
+    int boid_y;  //Y component of the boid position (pixel)
+    int boid_vx; //X component of the boid velocity (pixel/frame)
+    int boid_vy; //Y component of the boid velocity (pixel/frame)
+public:
+    boid(/* args */);
+    boid();
+
+    int x() const; //return boid_x
+    int y() const; //return boid_y
+    int vx() const; //return boid_vx
+    int vy() const; //return boid_vy
+};
+
+
+
+#endif
