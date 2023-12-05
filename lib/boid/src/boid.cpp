@@ -64,7 +64,7 @@ int boid::vy() const
     return boid_vy;
 }
 
-void boid::move(){
+void boid::move(){ //change position of boid object
     boid_x += boid_vx;
 
     if(boid_x > RIGHTMARGIN){
@@ -84,19 +84,19 @@ void boid::move(){
     }
 }
 
-int boid::distance(boid& b){
+int boid::distance(boid& b){ //calculate distance between two boid objects
 
-    int d_x = boid_x - b.x();
-    int d_y = boid_y - b.y();
+    int d_x{boid_x - b.x()};
+    int d_y{boid_y - b.y()};
     return sqrt(d_x*d_x + d_y*d_y);
 }
 
 void boid::separation(vector<boid>& otherboid){
 
-    int close_dx = 0;
-    int close_dy = 0;
+    int close_dx{0};   
+    int close_dy{0};
 
-     for (auto itr = otherboid.begin(); itr != otherboid.end(); ++itr){
+     for (auto itr = otherboid.begin(); itr != otherboid.end(); ++itr){ 
         if(distance(*itr) < D_SEP){
             close_dx += boid_x - itr->x();
             close_dy += boid_y - itr->y();   
