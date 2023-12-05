@@ -10,7 +10,9 @@ private:
     int boid_vx; //X component of the boid velocity (pixel/frame)
     int boid_vy; //Y component of the boid velocity (pixel/frame)
 public:
-    boid(/* args */);
+
+    //constructors
+    boid(int x, int y, int vx, int vy);
     boid();
 
     int x() const; //return boid_x
