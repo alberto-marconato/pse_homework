@@ -2,6 +2,8 @@
 #define BOID_H
 
 #include <ostream>
+#include <vector>
+using namespace std;
 
 class boid{
 private:
@@ -19,6 +21,10 @@ public:
     int y() const; //return boid_y
     int vx() const; //return boid_vx
     int vy() const; //return boid_vy
+
+    void move(); //move the boid throug the screen
+    int distance(boid& b); 
+    void separation(vector<boid>& otherboid);
 };
 
 
