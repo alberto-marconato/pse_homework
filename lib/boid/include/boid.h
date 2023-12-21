@@ -7,23 +7,23 @@ using namespace std;
 
 class boid{
 private:
-    int boid_x;  //X component of the boid position (pixel)
-    int boid_y;  //Y component of the boid position (pixel)
-    int boid_vx; //X component of the boid velocity (pixel/frame)
-    int boid_vy; //Y component of the boid velocity (pixel/frame)
+    float boid_x;  //X component of the boid position (pixel)
+    float boid_y;  //Y component of the boid position (pixel)
+    float boid_vx; //X component of the boid velocity (pixel/frame)
+    float boid_vy; //Y component of the boid velocity (pixel/frame)
 public:
 
     //constructors
-    boid(int x, int y, int vx, int vy);
+    boid(float x, float y, float vx, float vy);
     boid();
 
-    int x() const; //return boid_x
-    int y() const; //return boid_y
-    int vx() const; //return boid_vx
-    int vy() const; //return boid_vy
+    float x() const; //return boid_x
+    float y() const; //return boid_y
+    float vx() const; //return boid_vx
+    float vy() const; //return boid_vy
 
     void move(); //move the boid throug the screen
-    int distance(boid& b); 
+    float distance(boid& b); 
     void separation(vector<boid>& boidarray);
 };
 
