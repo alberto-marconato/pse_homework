@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <cstdlib>
+#include <ctime>
 
 using std::cerr;
 using namespace std;
@@ -35,7 +37,9 @@ boid::boid(float x, float y, float vx, float vy)
 }
 
 const boid& default_boid(){
-    static boid b{0, 0 , MINSPEED, MINSPEED};
+    float random_x = LEFTMARGIN + static_cast <float> (rand()) /( static_cast <float> (RIGHTMARGIN/(RIGHTMARGIN-LEFTMARGIN)));
+    float random_y = BOTTOMARGIN + static_cast <float> (rand()) /( static_cast <float> (TOPMARGIN/(TOPMARGIN-BOTTOMARGIN)));
+    static boid b{ random_x , random_y , MINSPEED, MINSPEED};
     return b;
 }
 
