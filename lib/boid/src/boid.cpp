@@ -16,7 +16,7 @@ using namespace std;
 #define D_SEP 5
 #define AVOIDFACTOR 0.7
 
-boid::boid(int x, int y, int vx, int vy)
+boid::boid(float x, float y, float vx, float vy)
     :boid_x{x}, boid_y{y}, boid_vx{vx}, boid_vy{vy}
 {
 
@@ -44,22 +44,22 @@ boid::boid()
 {
 }
 
-int boid::x() const
+float boid::x() const
 {
     return boid_x;
 }
 
-int boid::y() const
+float boid::y() const
 {
     return boid_y;
 }
 
-int boid::vx() const
+float boid::vx() const
 {
     return boid_vx;
 }
 
-int boid::vy() const
+float boid::vy() const
 {
     return boid_vy;
 }
@@ -84,20 +84,20 @@ void boid::move(){ //change position of boid object
     }
 }
 
-int boid::distance(boid& b){ //calculate distance between two boid objects
+float boid::distance(boid& b){ //calculate distance between two boid objects
 
-    int d_x{boid_x - b.x()};
-    int d_y{boid_y - b.y()};
+    float d_x{boid_x - b.x()};
+    float d_y{boid_y - b.y()};
     return sqrt(d_x*d_x + d_y*d_y);
 }
 
-void boid::separation(vector<boid>& otherboid){
+void boid::separation(vector<boid>& boidarray){
 
-    int close_dx{0};   
-    int close_dy{0};
+    float close_dx{0};   
+    float close_dy{0};
 
-     for (auto itr = otherboid.begin(); itr != otherboid.end(); ++itr){ 
-        if(distance(*itr) < D_SEP){
+     for (auto itr = boidarray.begin(); itr != boidarray.end(); ++itr){ 
+        if(distance(*itr) < D_SEP ){
             close_dx += boid_x - itr->x();
             close_dy += boid_y - itr->y();   
         }

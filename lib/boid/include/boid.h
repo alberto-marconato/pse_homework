@@ -24,7 +24,7 @@ public:
 
     void move(); //move the boid throug the screen
     int distance(boid& b); 
-    void separation(vector<boid>& otherboid);
+    void separation(vector<boid>& boidarray);
 };
 
 
