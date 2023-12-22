@@ -19,6 +19,7 @@ using namespace std;
 #define D_CA 3
 #define AVOIDFACTOR 0.7
 #define ALIGNFACTOR 0.2
+#define CENTERINGFACTOR 0.5
 
 boid::boid(float x, float y, float vx, float vy)
     :boid_x{x}, boid_y{y}, boid_vx{vx}, boid_vy{vy}
@@ -84,7 +85,7 @@ void boid::move(){ //change position of boid object
 
     if(boid_y > TOPMARGIN){
         boid_y-= TOPMARGIN;
-    }
+    }   
     if(boid_y < BOTTOMARGIN){
         boid_y += TOPMARGIN;
     }
@@ -159,6 +160,6 @@ void boid::cohesion(vector<boid>& boidarray){
     }
     
 
-    boid_vx += (xpos_avg - boid_vx)*ALIGNFACTOR;
-    boid_vy += (ypos_avg - boid_vy)*ALIGNFACTOR; 
+    boid_vx += (xpos_avg - boid_x)*CENTERINGFACTOR;
+    boid_vy += (ypos_avg - boid_y)*CENTERINGFACTOR; 
 }
