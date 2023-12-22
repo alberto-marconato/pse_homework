@@ -28,7 +28,11 @@ public:
     void separation(vector<boid>& boidarray);
     void alignment(vector<boid>& boidarray);
     void cohesion(vector<boid>& boidarray);
+
 };
+
+// Operators
+std::ostream& operator<<(std::ostream& os, const boid& b);
 
 
 

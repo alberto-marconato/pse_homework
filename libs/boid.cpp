@@ -170,3 +170,14 @@ void boid::cohesion(vector<boid>& boidarray){
     boid_vx += (xpos_avg - boid_x)*CENTERINGFACTOR;
     boid_vy += (ypos_avg - boid_y)*CENTERINGFACTOR; 
 }
+
+
+// Operators
+
+ostream& operator<<(ostream& os, const boid& b)
+{
+	return os << '(' << b.x()
+		<< ',' << b.y()
+		<< ',' << b.vx() 
+        << ',' << b.vy() <<')';
+}
