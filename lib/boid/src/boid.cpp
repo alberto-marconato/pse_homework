@@ -47,7 +47,9 @@ boid::boid(float x, float y, float vx, float vy)
 const boid& default_boid(){
     float random_x = LEFTMARGIN + static_cast <float> (rand()) /( static_cast <float> (RIGHTMARGIN/(RIGHTMARGIN-LEFTMARGIN)));
     float random_y = BOTTOMARGIN + static_cast <float> (rand()) /( static_cast <float> (TOPMARGIN/(TOPMARGIN-BOTTOMARGIN)));
-    static boid b{ random_x , random_y , MINSPEED, MINSPEED};
+    float random_vx = MINSPEED + static_cast <float> (rand()) /( static_cast <float> (MAXSPEED / (MAXSPEED - MINSPEED)));
+    float random_vy = MINSPEED + static_cast <float> (rand()) /( static_cast <float> (MAXSPEED / (MAXSPEED - MINSPEED)));
+    static boid b{ random_x , random_y , random_vx, random_vy};
     return b;
 }
 
