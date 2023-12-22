@@ -15,7 +15,7 @@ public:
 
     //constructors
     boid(float x, float y, float vx, float vy);
-    boid();
+    boid(); 
 
     float x() const; //return boid_x
     float y() const; //return boid_y
@@ -23,8 +23,11 @@ public:
     float vy() const; //return boid_vy
 
     void move(); //move the boid throug the screen
-    float distance(boid& b); 
+    float distance(boid& b); //calclulate the distance between two boids
+
     void separation(vector<boid>& boidarray);
+    void alignment(vector<boid>& boidarray);
+    void cohesion(vector<boid>& boidarray);
 };
 
 

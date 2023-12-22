@@ -16,7 +16,9 @@ using namespace std;
 #define MAXSPEED 10
 #define MINSPEED 2
 #define D_SEP 5
+#define D_CA 3
 #define AVOIDFACTOR 0.7
+#define ALIGNFACTOR 0.2
 
 boid::boid(float x, float y, float vx, float vy)
     :boid_x{x}, boid_y{y}, boid_vx{vx}, boid_vy{vy}
@@ -95,13 +97,13 @@ float boid::distance(boid& b){ //calculate distance between two boid objects
     return sqrt(d_x*d_x + d_y*d_y);
 }
 
-void boid::separation(vector<boid>& boidarray){
+void boid::separation(vector<boid>& boidarray){ 
 
     float close_dx{0};   
     float close_dy{0};
 
      for (auto itr = boidarray.begin(); itr != boidarray.end(); ++itr){ 
-        if(distance(*itr) < D_SEP ){
+        if(distance(*itr) <= D_SEP){
             close_dx += boid_x - itr->x();
             close_dy += boid_y - itr->y();   
         }
@@ -110,4 +112,53 @@ void boid::separation(vector<boid>& boidarray){
     boid_vx += close_dx * AVOIDFACTOR;
     boid_vy += close_dy * AVOIDFACTOR;
 
+}
+
+void boid::alignment(vector<boid>& boidarray){
+    
+    float xvel_avg{0};
+    float yvel_avg{0};
+    int close_boids{0}; //number of boids with a distance under D_CA
+
+    for (auto itr = boidarray.begin(); itr != boidarray.end(); ++itr){ 
+        if(distance(*itr) <= D_CA){
+             xvel_avg += itr->vx();
+             yvel_avg += itr->vy();
+             close_boids++;
+        }
+    }
+
+    if(close_boids > 0){
+        xvel_avg = xvel_avg / close_boids;
+        yvel_avg = yvel_avg / close_boids;
+    }
+    
+
+    boid_vx += (xvel_avg - boid_vx)*ALIGNFACTOR;
+    boid_vy += (yvel_avg - boid_vy)*ALIGNFACTOR; 
+
+}
+
+void boid::cohesion(vector<boid>& boidarray){
+
+    float xpos_avg{0};
+    float ypos_avg{0};
+    int close_boids{0};
+
+    for (auto itr = boidarray.begin(); itr != boidarray.end(); ++itr){ 
+        if(distance(*itr) <= D_CA){
+            xpos_avg += itr->x();
+            ypos_avg += itr->y();
+            close_boids++;
+        }
+    }
+
+    if(close_boids > 0){
+        xpos_avg = xpos_avg / close_boids;
+        xpos_avg = xpos_avg / close_boids;
+    }
+    
+
+    boid_vx += (xpos_avg - boid_vx)*ALIGNFACTOR;
+    boid_vy += (ypos_avg - boid_vy)*ALIGNFACTOR; 
 }
