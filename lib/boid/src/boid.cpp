@@ -9,14 +9,19 @@
 using std::cerr;
 using namespace std;
 
-#define LEFTMARGIN 0
-#define RIGHTMARGIN 1920
+//definitions of parameters used in this library
+
+#define LEFTMARGIN 0 
+#define RIGHTMARGIN 50
 #define BOTTOMARGIN 0
-#define TOPMARGIN 1080
+#define TOPMARGIN 30
+
 #define MAXSPEED 10
-#define MINSPEED 2
+#define MINSPEED 1
+
 #define D_SEP 5
 #define D_CA 3
+
 #define AVOIDFACTOR 0.7
 #define ALIGNFACTOR 0.2
 #define CENTERINGFACTOR 0.5

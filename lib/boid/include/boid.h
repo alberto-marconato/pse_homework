@@ -23,7 +23,7 @@ public:
     float vy() const; //return boid_vy
 
     void move(); //move the boid throug the screen
-    float distance(boid& b); //calclulate the distance between two boids
+    float distance(boid& b); //calclulate the distance from another boid
 
     void separation(vector<boid>& boidarray);
     void alignment(vector<boid>& boidarray);
