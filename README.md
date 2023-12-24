@@ -2,8 +2,11 @@
 
 Per compilare il programma seguire i seguenti passaggi: 
 
-1. Creare una nuova cartella `build` all'interno di quella principale 
+```bash
+$ mkdir build
+$ cd build 
+$ cmake ..
+$ make  
+```
 
-2. All'interno della cartella `build` eseguire il comando `cmake ..`
-
-3. Successivamente, sempre all'interno della stessa cartella, eseguire il programma `make` 
+E' stata creata una cartella `test` per poter testare la libreria e le funzioni che la compongono. Per avviare un test basta eseguire il comando `./test` all'interno della cartella appena citata. La lista delle operzioni svolte viene salvata nel file log.txt (quest'ultimo viene aggiornato ad ogni avvio con i risultati dell'ultima esecuzione).
