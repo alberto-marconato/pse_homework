@@ -32,31 +32,31 @@ boid::boid(float x, float y, float vx, float vy)
 
     if (boid_x < LEFTMARGIN || boid_x > RIGHTMARGIN || boid_y < BOTTOMARGIN || boid_y > TOPMARGIN )
     {
-        cerr << "invalid boid positions\n";
+        cerr << "Error during boid creation: invalid boid positions\n";
 		exit(1);
     }
 
     if (sqrt(boid_vx*boid_vx + boid_vy*boid_vy) > MAXSPEED || sqrt(boid_vx*boid_vx + boid_vy*boid_vy) < MINSPEED)
     {
-        cerr << "invalid boid speed\n";
+        cerr << "Error during boid creation: invalid boid speed\n";
 		exit(1);
     }  
 
 }
 
 const boid& default_boid(){
-    float random_x = LEFTMARGIN + static_cast <float> (rand()) /( static_cast <float> (RIGHTMARGIN/(RIGHTMARGIN-LEFTMARGIN)));
-    float random_y = BOTTOMARGIN + static_cast <float> (rand()) /( static_cast <float> (TOPMARGIN/(TOPMARGIN-BOTTOMARGIN)));
-    float random_vx = MINSPEED + static_cast <float> (rand()) /( static_cast <float> (MAXSPEED / (MAXSPEED - MINSPEED)));
-    float random_vy = MINSPEED + static_cast <float> (rand()) /( static_cast <float> (MAXSPEED / (MAXSPEED - MINSPEED)));
-    static boid b{ random_x , random_y , random_vx, random_vy};
+    static boid b{ LEFTMARGIN, BOTTOMARGIN, MINSPEED, MINSPEED };
     return b;
 }
 
 boid::boid()
     :boid_x{default_boid().x()}, boid_y{default_boid().y()}, boid_vx{default_boid().vx()}, boid_vy{default_boid().vy()}
 {
-}
+    boid_x += static_cast <float> (rand()) / (RAND_MAX/(RIGHTMARGIN-LEFTMARGIN));
+    boid_y += static_cast<float> (rand()) / (RAND_MAX/(TOPMARGIN-BOTTOMARGIN));
+    boid_vx += static_cast<float> (rand()) / (RAND_MAX / (MAXSPEED - MINSPEED));
+    boid_vy += static_cast<float> (rand()) / (RAND_MAX / (MAXSPEED - MINSPEED));
+} 
 
 float boid::x() const
 {
@@ -179,5 +179,5 @@ ostream& operator<<(ostream& os, const boid& b)
 	return os << '(' << b.x()
 		<< ',' << b.y()
 		<< ',' << b.vx() 
-        << ',' << b.vy() <<')';
+        << ',' << b.vy() <<')' << endl;
 }
