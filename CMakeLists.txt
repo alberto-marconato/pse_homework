@@ -10,3 +10,4 @@ add_subdirectory(libs)
 
 # The executable code is here
 add_subdirectory(src)
+add_subdirectory(test)
