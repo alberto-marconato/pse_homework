@@ -21,5 +21,17 @@ int main(){
         cout<< " con valori (x , y , vx , vy) = " <<boidvector.at(i)<<endl;
    }
 
-   cout << "Vettore inizializzato. Nessun errrore ;) \n"; 
+   cout << "Vettore inizializzato. Nessun errrore ;) \n\n";
+   cout << "2) Testando la funzione move() ... \n";
+
+   for (auto itr = boidvector.begin(); itr != boidvector.end(); ++itr)
+   {
+        cout<< "Muovo boid da posizione ( " << itr->x() << " , " << itr->y() <<" ) " ;
+        itr->move();
+        cout<< "alla posizione ( " << itr->x() << " , " << itr->y() <<" ) " ;
+        cout<< "con vettore di velocità ( " << itr->vx() << " , " << itr->vy() <<" )\n";
+   }
+
+   cout << "Nessun errore durante il movimento ;) \n\n";
+    
 }
