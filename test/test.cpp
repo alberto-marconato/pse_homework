@@ -1,5 +1,6 @@
 #include "boid.h"
 #include <iostream>
+#include <fstream>
 
 #define VECTOR_DIM 50
 
@@ -7,31 +8,38 @@ using namespace std;
 
 int main(){
 
-    cout << "------ TEST ------ \n";
-     
-    srand (static_cast <unsigned> (time(0))); // seed generation for boid creation
+     srand (static_cast <unsigned> (time(0))); // seed generation for boid creation
 
-   cout << "1) Inizializzando un vettore di boid ... \n"; 
+     ofstream outfile ("log.txt");
+
+    cout << "------ TEST ------ \n";
+
+   cout << "1) Inizializzando un vettore di boid ... \n"; // Test 1
    vector<boid> boidvector;
 
-   for (int i = 0; i < VECTOR_DIM; ++i)
+   for (int i = 0; i < VECTOR_DIM; ++i) // Testing generation of a vector of boid
    {
         boidvector.push_back(boid());
-        cout<< "Creato boid numero " << boidvector.size();
-        cout<< " con valori (x , y , vx , vy) = " <<boidvector.at(i)<<endl;
+        outfile<< "Creato boid numero " << boidvector.size();
+        outfile<< " con valori (x , y , vx , vy) = " <<boidvector.at(i)<<endl;
    }
 
    cout << "Vettore inizializzato. Nessun errrore ;) \n\n";
-   cout << "2) Testando la funzione move() ... \n";
 
-   for (auto itr = boidvector.begin(); itr != boidvector.end(); ++itr)
+   cout << "2) Testando la funzione move() ... \n"; // Test 2
+
+   for (auto itr = boidvector.begin(); itr != boidvector.end(); ++itr) // Testing movement for every boid created
    {
-        cout<< "Muovo boid da posizione ( " << itr->x() << " , " << itr->y() <<" ) " ;
+        outfile<< "Muovo boid da posizione (" << itr->x() << " , " << itr->y() <<") " ;
         itr->move();
-        cout<< "alla posizione ( " << itr->x() << " , " << itr->y() <<" ) " ;
-        cout<< "con vettore di velocità ( " << itr->vx() << " , " << itr->vy() <<" )\n";
+        outfile<< "a posizione (" << itr->x() << " , " << itr->y() <<") " ;
+        outfile<< "con vettore di velocità (" << itr->vx() << " , " << itr->vy() <<")" << endl;
    }
 
    cout << "Nessun errore durante il movimento ;) \n\n";
+
+   cout << "Test terminato. Nessun PC esploso! ;) \n" ;
+
+   outfile.close();
     
 }
