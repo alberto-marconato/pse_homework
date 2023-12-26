@@ -54,6 +54,7 @@ int main(){
    cout << "Nessun errore durante il calcolo delle distanze ;) \n\n";
 
    cout << "Test terminato. Nessun PC esploso! ;) \n" ;
+   cout << "(Per maggiori dettagli leggere il file log.txt)\n";
 
    outfile.close();
 
