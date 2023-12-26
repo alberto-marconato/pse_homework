@@ -38,7 +38,7 @@ int main(){
 
    cout << "Nessun errore durante il movimento ;) \n\n";
 
-      cout << "3) Testando la funzione distance() ... \n"; // Test 2
+      cout << "3) Testando la funzione distance() ... \n"; // Test 3
 
    for (auto itr = boidvector.begin(); itr != boidvector.end(); ++itr) // Testing movement for every boid created
    {
@@ -52,6 +52,17 @@ int main(){
    }
 
    cout << "Nessun errore durante il calcolo delle distanze ;) \n\n";
+
+   cout << "4) Testando la funzione separation() ... \n"; // Test 4
+
+     for (auto itr = boidvector.begin(); itr != boidvector.end(); ++itr)
+     {
+          outfile<< "Velocità prima della separazione (" << itr->vx() << " , " << itr->vy() <<")\n" ;
+          itr->separation(boidvector);
+          outfile<< "Velocità dopo la separazione (" <<  itr->vx() << " , " << itr->vy() <<")\n" ;
+     }
+
+   cout << "Nessun errore durante l'allineamento dei boid ;) \n\n";
 
    cout << "Test terminato. Nessun PC esploso! ;) \n" ;
    cout << "(Per maggiori dettagli leggere il file log.txt)\n";
