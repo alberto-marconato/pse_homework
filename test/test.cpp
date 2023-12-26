@@ -38,6 +38,21 @@ int main(){
 
    cout << "Nessun errore durante il movimento ;) \n\n";
 
+      cout << "3) Testando la funzione distance() ... \n"; // Test 2
+
+   for (auto itr = boidvector.begin(); itr != boidvector.end(); ++itr) // Testing movement for every boid created
+   {
+     for (int i = 0; i < VECTOR_DIM; ++i)
+     {
+          outfile<< "Distanza da (" << itr->x() << " , " << itr->y() <<") " ;
+          outfile<< "a (" << boidvector[i].x() << " , " << boidvector[i].y() <<") " ;
+          outfile<< "pari a: " << itr->distance(boidvector[i]) << endl;
+     }
+       
+   }
+
+   cout << "Nessun errore durante il movimento ;) \n\n";
+
    cout << "Test terminato. Nessun PC esploso! ;) \n" ;
 
    outfile.close();
