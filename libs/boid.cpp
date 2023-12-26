@@ -111,7 +111,7 @@ void boid::separation(vector<boid>& boidarray){
     float close_dy{0};
 
      for (auto itr = boidarray.begin(); itr != boidarray.end(); ++itr){ 
-        if(distance(*itr) <= D_SEP){
+        if(distance(*itr) <= D_SEP && distance(*itr) != 0){
             close_dx += boid_x - itr->x();
             close_dy += boid_y - itr->y();   
         }
@@ -129,7 +129,7 @@ void boid::alignment(vector<boid>& boidarray){
     int close_boids{0}; //number of boids with a distance under D_CA
 
     for (auto itr = boidarray.begin(); itr != boidarray.end(); ++itr){ 
-        if(distance(*itr) <= D_CA){
+        if(distance(*itr) <= D_CA && distance(*itr) != 0){
              xvel_avg += itr->vx();
              yvel_avg += itr->vy();
              close_boids++;
@@ -154,7 +154,7 @@ void boid::cohesion(vector<boid>& boidarray){
     int close_boids{0};
 
     for (auto itr = boidarray.begin(); itr != boidarray.end(); ++itr){ 
-        if(distance(*itr) <= D_CA){
+        if(distance(*itr) <= D_CA && distance(*itr) != 0){
             xpos_avg += itr->x();
             ypos_avg += itr->y();
             close_boids++;
