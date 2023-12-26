@@ -51,7 +51,7 @@ int main(){
        
    }
 
-   cout << "Nessun errore durante il movimento ;) \n\n";
+   cout << "Nessun errore durante il calcolo delle distanze ;) \n\n";
 
    cout << "Test terminato. Nessun PC esploso! ;) \n" ;
 
