@@ -10,7 +10,7 @@ int main(){
 
      srand (static_cast <unsigned> (time(0))); // seed generation for boid creation
 
-     ofstream outfile ("log.txt");
+     ofstream outfile ("test/log.txt");
 
     cout << "------ TEST ------ \n";
 
