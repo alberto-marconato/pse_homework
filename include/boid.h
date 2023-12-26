@@ -11,6 +11,9 @@ private:
     float boid_y;  //Y component of the boid position (pixel)
     float boid_vx; //X component of the boid velocity (pixel/frame)
     float boid_vy; //Y component of the boid velocity (pixel/frame)
+
+    void checkspeeds(float vx, float vy);
+    void checkcoordinates(float x, float y);
 public:
 
     //constructors

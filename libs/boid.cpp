@@ -11,20 +11,20 @@ using namespace std;
 
 //definitions of parameters used in this library
 
-#define LEFTMARGIN 0 
-#define RIGHTMARGIN 50
-#define BOTTOMARGIN 0
-#define TOPMARGIN 30
+#define LEFTMARGIN 0 // left margin of the visualizer
+#define RIGHTMARGIN 50 // right margin of the visualizer
+#define BOTTOMARGIN 0 // boottom margin of the visualizer
+#define TOPMARGIN 30 // top margin of the visualizer
 
-#define MAXSPEED 10
-#define MINSPEED 1
+#define MAXSPEED 10 // maximum speed of a boid
+#define MINSPEED 1 // minimum speed of a boid
 
 #define D_SEP 5
 #define D_CA 3
 
-#define AVOIDFACTOR 0.7
-#define ALIGNFACTOR 0.2
-#define CENTERINGFACTOR 0.5
+#define AVOIDFACTOR 1
+#define ALIGNFACTOR 1
+#define CENTERINGFACTOR 1
 
 boid::boid(float x, float y, float vx, float vy)
     :boid_x{x}, boid_y{y}, boid_vx{vx}, boid_vy{vy}
@@ -79,23 +79,11 @@ float boid::vy() const
 }
 
 void boid::move(){ //change position of boid object
+
     boid_x += boid_vx;
-
-    if(boid_x > RIGHTMARGIN){
-        boid_x -= RIGHTMARGIN;
-    }
-    if(boid_x < LEFTMARGIN){
-        boid_y += RIGHTMARGIN;
-    }
-
     boid_y += boid_vy;
 
-    if(boid_y > TOPMARGIN){
-        boid_y-= TOPMARGIN;
-    }   
-    if(boid_y < BOTTOMARGIN){
-        boid_y += TOPMARGIN;
-    }
+    checkcoordinates(boid_x , boid_y);
 }
 
 float boid::distance(boid& b){ //calculate distance between two boid objects
@@ -120,6 +108,8 @@ void boid::separation(vector<boid>& boidarray){
     boid_vx += close_dx * AVOIDFACTOR;
     boid_vy += close_dy * AVOIDFACTOR;
 
+    checkspeeds(boid_vx, boid_vy);
+
 }
 
 void boid::alignment(vector<boid>& boidarray){
@@ -143,7 +133,9 @@ void boid::alignment(vector<boid>& boidarray){
     
 
     boid_vx += (xvel_avg - boid_vx)*ALIGNFACTOR;
-    boid_vy += (yvel_avg - boid_vy)*ALIGNFACTOR; 
+    boid_vy += (yvel_avg - boid_vy)*ALIGNFACTOR;
+
+    checkspeeds(boid_vx, boid_vy); 
 
 }
 
@@ -169,8 +161,36 @@ void boid::cohesion(vector<boid>& boidarray){
 
     boid_vx += (xpos_avg - boid_x)*CENTERINGFACTOR;
     boid_vy += (ypos_avg - boid_y)*CENTERINGFACTOR; 
+
+    checkspeeds(boid_vx, boid_vy);
+
 }
 
+void boid::checkspeeds(float vx, float vy){
+    if(boid_vx > MAXSPEED){
+        boid_vx = MAXSPEED;
+    }   
+    if(boid_vy < MINSPEED){
+        boid_vy = MINSPEED;
+    }
+}
+
+void boid::checkcoordinates(float x, float y){
+
+    if(boid_x > RIGHTMARGIN){
+        boid_x -= RIGHTMARGIN;
+    }
+    if(boid_x < LEFTMARGIN){
+        boid_x += RIGHTMARGIN;
+    }
+
+    if(boid_y > TOPMARGIN){
+        boid_y-= TOPMARGIN;
+    }   
+    if(boid_y < BOTTOMARGIN){
+        boid_y += TOPMARGIN;
+    }
+}
 
 // Operators
 
