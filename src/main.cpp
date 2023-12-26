@@ -26,10 +26,15 @@ int main(){
         boids.push_back(boid());
     }
 
+    cout << "Avviata simulazione di " << NUMBER_OF_BOIDS << " boid per " << NUMBER_OF_FRAMES << " frames\n" ;
+
     for (int i = 0; i < NUMBER_OF_FRAMES; ++i) //for every frames rendered
     {
         for (auto itr = boids.begin(); itr != boids.end(); ++itr) //for every boid object
         {
+            itr->separation(boids);
+            itr->cohesion(boids);
+            itr->alignment(boids);
             outfile << itr->x() << " " << itr->y() << " "; // write the coordinates on coordinates.txt
             itr->move(); //move the boid
         }
@@ -38,7 +43,7 @@ int main(){
         
     }
     
-    
+    cout << "Simulazione terminata. Risultati salvati in coordinates.txt .\n ";
     
     
     outfile.close();

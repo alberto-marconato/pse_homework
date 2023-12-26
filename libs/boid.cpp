@@ -22,9 +22,9 @@ using namespace std;
 #define D_SEP 5
 #define D_CA 3
 
-#define AVOIDFACTOR 1
-#define ALIGNFACTOR 1
-#define CENTERINGFACTOR 1
+#define AVOIDFACTOR 0.8
+#define ALIGNFACTOR 0.6
+#define CENTERINGFACTOR 0.5
 
 boid::boid(float x, float y, float vx, float vy)
     :boid_x{x}, boid_y{y}, boid_vx{vx}, boid_vy{vy}
