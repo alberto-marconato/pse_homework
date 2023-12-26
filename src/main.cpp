@@ -19,19 +19,19 @@ int main(){
 
     ofstream outfile ("src/coordinates.txt");
 
-    outfile << BOTTOMARGIN <<" " << TOPMARGIN << " " << LEFTMARGIN << " " << RIGHTMARGIN <<"\n"; 
+    outfile << LEFTMARGIN <<" " << RIGHTMARGIN << " " << BOTTOMARGIN << " " << TOPMARGIN <<"\n"; 
 
-    for (int i = 0; i < NUMBER_OF_BOIDS; ++i)
+    for (int i = 0; i < NUMBER_OF_BOIDS; ++i) // creation of the boid vector
     {
         boids.push_back(boid());
     }
 
-    for (int i = 0; i < NUMBER_OF_FRAMES; ++i)
+    for (int i = 0; i < NUMBER_OF_FRAMES; ++i) //for every frames rendered
     {
-        for (auto itr = boids.begin(); itr != boids.end(); ++itr)
+        for (auto itr = boids.begin(); itr != boids.end(); ++itr) //for every boid object
         {
-            outfile << itr->x() << " " << itr->y() << " ";
-            itr->move();
+            outfile << itr->x() << " " << itr->y() << " "; // write the coordinates on coordinates.txt
+            itr->move(); //move the boid
         }
 
         outfile << "\n";
@@ -42,4 +42,6 @@ int main(){
     
     
     outfile.close();
+
+    return 0;
 }

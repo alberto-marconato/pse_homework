@@ -41,5 +41,7 @@ int main(){
    cout << "Test terminato. Nessun PC esploso! ;) \n" ;
 
    outfile.close();
+
+   return 0;
     
 }
