@@ -7,10 +7,10 @@ using namespace std;
 
 class boid{
 private:
-    float boid_x;  //X component of the boid position (pixel)
-    float boid_y;  //Y component of the boid position (pixel)
-    float boid_vx; //X component of the boid velocity (pixel/frame)
-    float boid_vy; //Y component of the boid velocity (pixel/frame)
+    float boid_x;  //X component of the boid position 
+    float boid_y;  //Y component of the boid position 
+    float boid_vx; //X component of the boid velocity 
+    float boid_vy; //Y component of the boid velocity 
 
     void checkspeeds(float vx, float vy);
     void checkcoordinates(float x, float y);

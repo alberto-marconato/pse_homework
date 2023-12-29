@@ -21,7 +21,7 @@ int main(){
    {
         boidvector.push_back(boid());
         outfile<< "Creato boid numero " << boidvector.size();
-        outfile<< " con valori (x , y , vx , vy) = " <<boidvector.at(i)<<endl;
+        outfile<< " con valori (x , y , vx , vy, v_abs) = " <<boidvector.at(i) <<endl;
    }
 
    cout << "Vettore inizializzato. Nessun errrore ;) \n\n";

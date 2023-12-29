@@ -36,16 +36,10 @@ boid::boid(float x, float y, float vx, float vy)
 		exit(1);
     }
 
-    if (sqrt(boid_vx*boid_vx + boid_vy*boid_vy) > MAXSPEED || sqrt(boid_vx*boid_vx + boid_vy*boid_vy) < MINSPEED)
-    {
-        cerr << "Error during boid creation: invalid boid speed\n";
-		exit(1);
-    }  
-
 }
 
 const boid& default_boid(){
-    static boid b{ LEFTMARGIN, BOTTOMARGIN, MINSPEED, MINSPEED };
+    static boid b{ LEFTMARGIN, BOTTOMARGIN, 0 , 0 };
     return b;
 }
 
@@ -54,8 +48,16 @@ boid::boid()
 {
     boid_x += static_cast <float> (rand()) / (RAND_MAX/(RIGHTMARGIN-LEFTMARGIN));
     boid_y += static_cast<float> (rand()) / (RAND_MAX/(TOPMARGIN-BOTTOMARGIN));
-    boid_vx += static_cast<float> (rand()) / (RAND_MAX / (MAXSPEED - MINSPEED));
-    boid_vy += static_cast<float> (rand()) / (RAND_MAX / (MAXSPEED - MINSPEED));
+    float boid_v_abs = MINSPEED +  static_cast <float> ((rand())) / (RAND_MAX / (MAXSPEED - MINSPEED));
+    boid_vx += static_cast<float> (2 * rand() - RAND_MAX) / (RAND_MAX / (boid_v_abs));
+    float vy_abs = sqrt(boid_v_abs*boid_v_abs - (boid_vx*boid_vx));
+    boid_vy += static_cast<float> (2 * vy_abs * signbit(rand() - RAND_MAX) - vy_abs);
+
+    if (sqrt(boid_vx*boid_vx + boid_vy*boid_vy) > MAXSPEED || sqrt(boid_vx*boid_vx + boid_vy*boid_vy) < MINSPEED)
+    {
+        cerr << "Error during boid creation: invalid boid speed\n";
+		exit(1);
+    } 
 } 
 
 float boid::x() const
@@ -203,5 +205,6 @@ ostream& operator<<(ostream& os, const boid& b)
 	return os << '(' << b.x()
 		<< ',' << b.y()
 		<< ',' << b.vx() 
-        << ',' << b.vy() <<')' << endl;
+        << ',' << b.vy()
+        << ',' << b.v_abs() << ')' << endl;
 }
