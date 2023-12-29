@@ -16,15 +16,15 @@ using namespace std;
 #define BOTTOMARGIN 0 // boottom margin of the visualizer
 #define TOPMARGIN 30 // top margin of the visualizer
 
-#define MAXSPEED 10 // maximum speed of a boid
-#define MINSPEED 1 // minimum speed of a boid
+#define MAXSPEED 10 // maximum absolute speed of a boid
+#define MINSPEED 1 // minimum absolute speed of a boid
 
 #define D_SEP 5
 #define D_CA 3
 
-#define AVOIDFACTOR 0.8
+#define AVOIDFACTOR 0.6
 #define ALIGNFACTOR 0.6
-#define CENTERINGFACTOR 0.5
+#define CENTERINGFACTOR 0.7
 
 boid::boid(float x, float y, float vx, float vy)
     :boid_x{x}, boid_y{y}, boid_vx{vx}, boid_vy{vy}
@@ -173,12 +173,21 @@ void boid::cohesion(vector<boid>& boidarray){
 }
 
 void boid::checkspeeds(float vx, float vy){
-    if(boid_vx > MAXSPEED){
-        boid_vx = MAXSPEED;
+    float abs = v_abs();
+
+    if(v_abs() > MAXSPEED){
+        boid_vx = (boid_vx / abs) * MAXSPEED;
+        boid_vy = (boid_vy / abs) * MINSPEED;
     }   
-    if(boid_vy < MINSPEED){
-        boid_vy = MINSPEED;
+    if(v_abs() < MINSPEED){
+        boid_vx = (boid_vx/ abs) * MINSPEED;
+        boid_vy = (boid_vy/ abs) * MINSPEED;
     }
+
+    /*if(v_abs() - MAXSPEED > 0 || v_abs() - MINSPEED < 0){
+        cerr << "Error during speed correction: invalid boid speed" << v_abs() -MINSPEED << "\n";
+		exit(1);
+    }*/
 }
 
 void boid::checkcoordinates(float x, float y){
