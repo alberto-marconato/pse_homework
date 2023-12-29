@@ -180,14 +180,9 @@ void boid::checkspeeds(float vx, float vy){
         boid_vy = (boid_vy / abs) * MAXSPEED;
     }   
     if(v_abs() < MINSPEED){
-        boid_vx = (boid_vx/ abs) * MINSPEED;
-        boid_vy = (boid_vy/ abs) * MINSPEED;
+        boid_vx = (boid_vx / abs) * MINSPEED;
+        boid_vy = (boid_vy / abs) * MINSPEED;
     }
-
-    /*if(v_abs() - MAXSPEED > 0 || v_abs() - MINSPEED < 0){
-        cerr << "Error during speed correction: invalid boid speed" << v_abs() -MINSPEED << "\n";
-		exit(1);
-    }*/
 }
 
 void boid::checkcoordinates(float x, float y){
