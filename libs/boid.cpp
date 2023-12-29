@@ -78,6 +78,10 @@ float boid::vy() const
     return boid_vy;
 }
 
+float boid::v_abs() const{
+    return sqrt(boid_vx*boid_vx + boid_vy*boid_vy);
+}
+
 void boid::move(){ //change position of boid object
 
     boid_x += boid_vx;

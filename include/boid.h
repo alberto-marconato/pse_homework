@@ -24,6 +24,7 @@ public:
     float y() const; //return boid_y
     float vx() const; //return boid_vx
     float vy() const; //return boid_vy
+    float v_abs() const; //return the absolute speed of the boid
 
     void move(); //move the boid throug the screen
     float distance(boid& b); //calclulate the distance from another boid
