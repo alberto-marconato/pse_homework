@@ -177,7 +177,7 @@ void boid::checkspeeds(float vx, float vy){
 
     if(v_abs() > MAXSPEED){
         boid_vx = (boid_vx / abs) * MAXSPEED;
-        boid_vy = (boid_vy / abs) * MINSPEED;
+        boid_vy = (boid_vy / abs) * MAXSPEED;
     }   
     if(v_abs() < MINSPEED){
         boid_vx = (boid_vx/ abs) * MINSPEED;
