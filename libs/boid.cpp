@@ -1,14 +1,5 @@
 #include "boid.h"
 
-#include <iostream>
-#include <vector>
-#include <math.h>
-#include <cstdlib>
-#include <ctime>
-
-using std::cerr;
-using namespace std;
-
 //definitions of parameters used in this library
 
 #define LEFTMARGIN 0 // left margin of the visualizer

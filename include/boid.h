@@ -1,8 +1,12 @@
 #ifndef BOID_H
 #define BOID_H
 
-#include <ostream>
+#include <iostream>
 #include <vector>
+#include <math.h>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 class boid{
