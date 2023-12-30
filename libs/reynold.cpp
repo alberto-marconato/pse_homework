@@ -1,15 +1,9 @@
-#include <vector>
-#include "boid.h"
+#include "reynold.h"
 
-using namespace std;
 
-void reynold_algorithm(vector<boid>& boidvector){
+void reynold_algorithm(vector<boid>& boidvector , vector<boid>::iterator boiditerator){
 
-    for (auto itr = boidvector.begin(); itr != boidvector.end(); ++itr) //for every boid object
-        {
-            itr->separation(boidvector);
-            itr->cohesion(boidvector);
-            itr->alignment(boidvector);
-            itr->move(); //move the boid
-        }
+    boiditerator->alignment(boidvector);
+    boiditerator->separation(boidvector);
+    boiditerator->cohesion(boidvector);
 }

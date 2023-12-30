@@ -1,6 +1,10 @@
-#include "boid.h"
 #include <iostream>
 #include <fstream>
+#include <thread>
+#include <mutex>
+
+#include "boid.h"
+#include "reynold.h"
 
 using namespace std;
 
@@ -15,8 +19,10 @@ using namespace std;
 int main(){
 
     srand (static_cast <unsigned> (time(0))); // seed generation for boid creation
-    vector<boid> boids;
 
+    vector<boid> boids;
+    vector<thread> boidThreads;
+    
     ofstream outfile ("src/coordinates.txt");
 
     outfile << LEFTMARGIN <<" " << RIGHTMARGIN << " " << BOTTOMARGIN << " " << TOPMARGIN <<"\n"; 
@@ -26,9 +32,13 @@ int main(){
         boids.push_back(boid());
     }
 
+    for (auto itr = boids.begin(); itr != boids.end(); ++itr){ //for every boid object
+        boidThreads.push_back(thread{reynold_algorithm, ref(boids), itr});
+    }
+
     cout << "Avviata simulazione di " << NUMBER_OF_BOIDS << " boid per " << NUMBER_OF_FRAMES << " frames\n" ;
 
-    for (int i = 0; i < NUMBER_OF_FRAMES; ++i) //for every frames rendered
+    /*for (int calculated_frames = 0; calculated_frames < NUMBER_OF_FRAMES; ++calculated_frames) //for every frames rendered
     {
         for (auto itr = boids.begin(); itr != boids.end(); ++itr) //for every boid object
         {
@@ -41,7 +51,13 @@ int main(){
 
         outfile << "\n";
         
+    }*/
+
+    for (auto itr = boidThreads.begin(); itr != boidThreads.end(); ++itr){ //for every thread
+        itr->join();
     }
+
+    
     
     cout << "Simulazione terminata. Risultati salvati in coordinates.txt .\n ";
     
