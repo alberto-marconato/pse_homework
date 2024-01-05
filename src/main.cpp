@@ -38,7 +38,7 @@ int main(){
         boidThreads.push_back(thread{reynold_algorithm, ref(boids), itr, NUMBER_OF_FRAMES});
     }
 
-
+    thread print{printCoordinates, ref(outfile), ref(boids), NUMBER_OF_FRAMES};
 
     cout << "Avviata simulazione di " << NUMBER_OF_BOIDS << " boid per " << NUMBER_OF_FRAMES << " frames\n" ;
 
@@ -60,6 +60,8 @@ int main(){
     for (auto itr = boidThreads.begin(); itr != boidThreads.end(); ++itr){ //for every thread
         itr->join();
     }
+
+    print.join();
 
     
     

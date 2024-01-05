@@ -5,55 +5,82 @@ condition_variable readyToCalculate;
 condition_variable readyToPrint;
 condition_variable readyToMove;
 
+int calculated = 0;
+int moved = 0;
+bool toPrint = false;
+
 void reynold_algorithm(vector<boid>& boidvector , vector<boid>::iterator boiditerator, int framesToRender){
-
-    //unique_lock<mutex> mlock(mtx);
-
-    cout << "Thread numero: " << std::this_thread::get_id() << endl;
-
+    
+    unique_lock<mutex> lock(mtx);
     int framesCalculated{0};
 
     while (framesCalculated < framesToRender)
     {
-        //readyToCalculate.wait(mlock);
-        mtx.lock();
-        cout << "Inizio calcoli" << endl;
-        boiditerator->alignment(boidvector);
+        if (toPrint == true)
+        {
+            readyToCalculate.wait(lock);
+        }
+        
+
         boiditerator->separation(boidvector);
         boiditerator->cohesion(boidvector);
-        mtx.unlock();
-        //readyToCalculate.notify_one();
-        framesCalculated++;
+        boiditerator->alignment(boidvector);
 
-        if (boiditerator == boidvector.end() - 1){
-            readyToPrint.notify_one();
+        cout << "Ho calcolato" << endl;
+
+        framesCalculated++;
+        calculated++;
+
+        if (calculated < boidvector.size())
+        {
+            readyToMove.wait(lock);
+        }else{
+            readyToMove.notify_all();
         }
+
+        boiditerator->move();
+        cout << "Ho mosso " << endl;
+        moved++;
+
+        if (moved = boidvector.size())
+        {
+            readyToPrint.notify_one();
+            toPrint = true;
+        }
+        
+        framesCalculated++;
     }
+    
+
     
 
 }
 
 
 
-void printCoordinates(ofstream file, vector<boid>& boidvector, int framesToRender){
+void printCoordinates(ofstream& file, vector<boid>& boidvector, int framesToRender){
 
-    unique_lock<mutex> mlock(mtx);
-
+    unique_lock<mutex> lock(mtx);
     int framesPrinted{0};
-
-    while (framesPrinted < framesToRender)
+    
+    while (framesPrinted < framesToRender )
     {
-        readyToPrint.wait(mlock);
+        readyToPrint.wait(lock);
 
         for (auto itr = boidvector.begin(); itr != boidvector.end(); ++itr) //for every boid object
         {
-            itr->move();
             file << itr->x() << " " << itr->y() << " "; // write the coordinates on coordinates.txt
         }
 
         file << "\n";
 
         framesPrinted++;
+        calculated = 0;
+        moved = 0;
+        toPrint = false;
+
+        readyToCalculate.notify_all();
     }
+    
     
 }
