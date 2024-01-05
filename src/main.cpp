@@ -22,7 +22,7 @@ int main(){
 
     vector<boid> boids;
     vector<thread> boidThreads;
-    
+
     ofstream outfile ("src/coordinates.txt");
 
     outfile << LEFTMARGIN <<" " << RIGHTMARGIN << " " << BOTTOMARGIN << " " << TOPMARGIN <<"\n"; 
@@ -32,9 +32,13 @@ int main(){
         boids.push_back(boid());
     }
 
+    
+
     for (auto itr = boids.begin(); itr != boids.end(); ++itr){ //for every boid object
-        boidThreads.push_back(thread{reynold_algorithm, ref(boids), itr});
+        boidThreads.push_back(thread{reynold_algorithm, ref(boids), itr, NUMBER_OF_FRAMES});
     }
+
+
 
     cout << "Avviata simulazione di " << NUMBER_OF_BOIDS << " boid per " << NUMBER_OF_FRAMES << " frames\n" ;
 
