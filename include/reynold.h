@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void reynold_algorithm(vector<boid>& boidvector, vector<boid>::iterator boiditerator, int framesToRender);
+void reynold_algorithm(vector<boid>& boidvector, vector<boid>::iterator boiditerator, int framesToRender, int boidnumber);
 void printCoordinates(ofstream& file, vector<boid>& boidvector, int framesToRender);
 
 #endif

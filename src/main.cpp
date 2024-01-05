@@ -32,15 +32,13 @@ int main(){
         boids.push_back(boid());
     }
 
-    
+    cout << "Avviata simulazione di " << NUMBER_OF_BOIDS << " boid per " << NUMBER_OF_FRAMES << " frames\n" ;
 
     for (auto itr = boids.begin(); itr != boids.end(); ++itr){ //for every boid object
-        boidThreads.push_back(thread{reynold_algorithm, ref(boids), itr, NUMBER_OF_FRAMES});
+        boidThreads.push_back(thread{reynold_algorithm, ref(boids), itr, NUMBER_OF_FRAMES, NUMBER_OF_BOIDS});
     }
 
     thread print{printCoordinates, ref(outfile), ref(boids), NUMBER_OF_FRAMES};
-
-    cout << "Avviata simulazione di " << NUMBER_OF_BOIDS << " boid per " << NUMBER_OF_FRAMES << " frames\n" ;
 
     /*for (int calculated_frames = 0; calculated_frames < NUMBER_OF_FRAMES; ++calculated_frames) //for every frames rendered
     {
