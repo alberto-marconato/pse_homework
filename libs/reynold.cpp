@@ -5,9 +5,8 @@ condition_variable readyToCalculate;
 condition_variable readyToPrint;
 condition_variable readyToMove;
 
-int calculated = 0;
+int calculated = 0; 
 int moved = 0;
-bool toPrint = false;
 
 void reynold_algorithm(vector<boid>& boidvector , vector<boid>::iterator boiditerator, int framesToRender, int boidnumber){
     
@@ -22,8 +21,6 @@ void reynold_algorithm(vector<boid>& boidvector , vector<boid>::iterator boidite
 
         calculated++;
 
-        //cout << "Boid calcolati "<< calculated << endl;
-
         if (calculated < boidnumber){
             readyToMove.wait(lock);
         }else{
@@ -33,7 +30,6 @@ void reynold_algorithm(vector<boid>& boidvector , vector<boid>::iterator boidite
         boiditerator->move();
         
         moved++;
-        //cout << "Boid mossi "<< moved << endl;
 
         if (moved == boidnumber)
         {
@@ -41,13 +37,9 @@ void reynold_algorithm(vector<boid>& boidvector , vector<boid>::iterator boidite
         }
 
         framesCalculated++;
-        //cout << "Calcolo " << framesCalculated <<endl;
 
         readyToCalculate.wait(lock);
     }
-    
-
-    
 
 }
 
@@ -72,8 +64,6 @@ void printCoordinates(ofstream& file, vector<boid>& boidvector, int framesToRend
         framesPrinted++;
         calculated = 0;
         moved = 0;
-
-        //cout<< "Stampa " <<framesPrinted << endl;
 
         readyToCalculate.notify_all();
     }

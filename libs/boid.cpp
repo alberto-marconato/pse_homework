@@ -2,13 +2,13 @@
 
 //definitions of parameters used in this library
 
-#define LEFTMARGIN 0 // left margin of the visualizer
-#define RIGHTMARGIN 50 // right margin of the visualizer
-#define BOTTOMARGIN 0 // boottom margin of the visualizer
-#define TOPMARGIN 30 // top margin of the visualizer
+#define LEFTMARGIN 0 
+#define RIGHTMARGIN 50 
+#define BOTTOMARGIN 0 
+#define TOPMARGIN 30 
 
-#define MAXSPEED 10 // maximum absolute speed of a boid
-#define MINSPEED 1 // minimum absolute speed of a boid
+#define MAXSPEED 10 
+#define MINSPEED 1
 
 #define D_SEP 5
 #define D_CA 3
@@ -113,7 +113,7 @@ void boid::alignment(vector<boid>& boidarray){
     
     float xvel_avg{0};
     float yvel_avg{0};
-    int close_boids{0}; //number of boids with a distance under D_CA
+    int close_boids{0}; 
 
     for (auto itr = boidarray.begin(); itr != boidarray.end(); ++itr){ 
         if(distance(*itr) <= D_CA && distance(*itr) != 0){

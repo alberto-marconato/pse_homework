@@ -34,38 +34,20 @@ int main(){
 
     cout << "Avviata simulazione di " << NUMBER_OF_BOIDS << " boid per " << NUMBER_OF_FRAMES << " frames\n" ;
 
-    for (auto itr = boids.begin(); itr != boids.end(); ++itr){ //for every boid object
+    for (auto itr = boids.begin(); itr != boids.end(); ++itr){ //starting a thread for every boid object
         boidThreads.push_back(thread{reynold_algorithm, ref(boids), itr, NUMBER_OF_FRAMES, NUMBER_OF_BOIDS});
     }
 
-    thread print{printCoordinates, ref(outfile), ref(boids), NUMBER_OF_FRAMES};
-
-    /*for (int calculated_frames = 0; calculated_frames < NUMBER_OF_FRAMES; ++calculated_frames) //for every frames rendered
-    {
-        for (auto itr = boids.begin(); itr != boids.end(); ++itr) //for every boid object
-        {
-            itr->separation(boids);
-            itr->cohesion(boids);
-            itr->alignment(boids);
-            outfile << itr->x() << " " << itr->y() << " "; // write the coordinates on coordinates.txt
-            itr->move(); //move the boid
-        }
-
-        outfile << "\n";
-        
-    }*/
+    thread print{printCoordinates, ref(outfile), ref(boids), NUMBER_OF_FRAMES}; //thread for output
 
     for (auto itr = boidThreads.begin(); itr != boidThreads.end(); ++itr){ //for every thread
         itr->join();
     }
 
     print.join();
-
-    
-    
+ 
     cout << "Simulazione terminata. Risultati salvati in coordinates.txt .\n ";
-    
-    
+
     outfile.close();
 
     return 0;
