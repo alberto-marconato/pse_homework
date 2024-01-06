@@ -9,4 +9,11 @@ $ cmake ..
 $ make  
 ```
 
-E' stata creata una cartella `test` per poter testare la libreria e le funzioni che la compongono. Per avviare un test basta eseguire il comando `./test` all'interno della cartella appena citata. La lista delle operzioni svolte viene salvata nel file log.txt (quest'ultimo viene aggiornato ad ogni avvio con i risultati dell'ultima esecuzione).
+Per eseguire il programma basta avviare l'eseguibile `main` che viene creato nella sottocartella `build/src`. Quest'ultimo crea un file di output `coordinates.txt`, tale file può essere utilizzato per visualizzare la simulazione tramite `visualizer.py` (contenuto nella sottocartella `src`).
+
+Quindi per eseguire una simulazione la lista dei comandi da eseguire è (all'interno della cartella build):
+
+```bash
+$ ./src/main
+$ python3 ../src/visualizer.py  
+```
